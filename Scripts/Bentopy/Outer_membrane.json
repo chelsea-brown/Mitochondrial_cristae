@@ -1,0 +1,82 @@
+{
+	"space": {
+		"size": [67, 67, 40],
+		"resolution": 1,
+		"periodic": false,
+		"compartments": [
+			{
+				"id": "membrane",
+				"shape": "cuboid"
+			}
+		]
+	},
+	"output": {
+		"title": "membrane_proteins",
+		"dir": ".",
+		"topol_includes": [
+			"/home/chelsea/Projects/Base_files/martini_v3.0.0.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0_ffbonded_alpha_v1.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0.0_phospholipids_v1.itp",
+			"/home/chelsea/Projects/Base_files/SAPE.itp",
+			"/home/chelsea/Projects/Base_files/PAPI.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0_CDLs.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0_sterols_v1.0.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0_ceramides_alpha_v1.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0.0_solvents_v1.itp",
+			"/home/chelsea/Projects/Base_files/martini_v3.0.0_ions_v1.itp",
+			"/martini/chelsea/Projects/Model_cristae/Outer_membrane/Full_size_outer_membrane/Protein_dense/System_VDAC_monomer/Setup/Bentopy/Structures/SAM_complex.itp",
+			"/martini/chelsea/Projects/Model_cristae/Outer_membrane/Full_size_outer_membrane/Protein_dense/System_VDAC_monomer/Setup/Bentopy/Structures/TOM_complex.itp",
+			"/martini/chelsea/Projects/Model_cristae/Outer_membrane/Full_size_outer_membrane/Protein_dense/System_VDAC_monomer/Setup/Bentopy/Structures/VDAC1.itp"
+		]
+	},
+	"segments": [
+		{
+			"name": "VDAC1",
+			"number": 20,
+			"path": "Structures/VDAC1_lipidshell.gro",
+			"compartments": ["membrane"],
+			"initial_rotation": [0, 0, 0],
+			"rotation_axes": {
+				"x": false,
+				"y": false,
+				"z": true
+			},
+			"rules": [
+				"greater_than z 16",
+				"less_than z 23"
+			]
+		},
+		{
+			"name": "SAM_complex",
+			"number": 3,
+			"path": "Structures/SAM_lipidshell.gro",
+			"compartments": ["membrane"],
+			"initial_rotation": [0, 0, 0],
+			"rotation_axes": {
+				"x": false,
+				"y": false,
+				"z": true
+			},
+			"rules": [
+				"greater_than z 12",
+				"less_than z 27"
+			]
+		},
+		{
+			"name": "TOM_complex",
+			"number": 3,
+			"path": "Structures/TOM_lipidshell.gro",
+			"compartments": ["membrane"],
+			"initial_rotation": [0, 0, 0],
+			"rotation_axes": {
+				"x": false,
+				"y": false,
+				"z": true
+			},
+			"rules": [
+				"greater_than z 14",
+				"less_than z 28"
+			]
+		}
+	]
+}
