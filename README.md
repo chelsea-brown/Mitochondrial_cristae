@@ -22,7 +22,7 @@ and for analysis
 Below is a summary of the steps taken to assemble the system.
 
 ### Assembling the structures
-More information on this is available in the full publication, but breifly every effort was made to include all residues from all included proteins that would be found in the mature form. The [PDB](https://www.rcsb.org/) was consulted for solved structures. Where there were residues missing, or only solved in a homologues species, the [AlphaFold2](https://www.nature.com/articles/s41586-021-03819-2) database (https://alphafold.ebi.ac.uk/) was used to place the complete subunits in the correct position using pymol, after removal of any signal sequences (as labelled on [UniProt](https://www.uniprot.org/)). Otherwise, the [ColabFold](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb) tool was used. In one instance, the [AlphaFold 3 server](https://alphafoldserver.com/) was used for a large complex with no solved structures. 
+More information on this is available in the full publication, but briefly every effort was made to include all residues from all included proteins that would be found in the mature form. The [PDB](https://www.rcsb.org/) was consulted for solved structures. Where there were residues missing, or only solved in a homologues species, the [AlphaFold2](https://www.nature.com/articles/s41586-021-03819-2) database (https://alphafold.ebi.ac.uk/) was used to place the complete subunits in the correct position using pymol, after removal of any signal sequences (as labelled on [UniProt](https://www.uniprot.org/)). Otherwise, the [ColabFold](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb) tool was used. In one instance, the [AlphaFold 3 server](https://alphafoldserver.com/) was used for a large complex with no solved structures. 
 
 For post-translational modifications, the [charmm-gui](https://www.charmm-gui.org/) webserver can be used to add these where needed into the atomistic structure. 
 
@@ -35,7 +35,7 @@ High-throughput simulations should start from an orientated protein, with dummy 
 
 martinize converts atomistic (AT) protein structures to coarse-grained (CG) strucutres, and in this case the Martini 3 forcefield (`-ff martini3001`) using an elastic network between all chains present in the protein with a force-constant of 500 kJ/mol/nm<sup>2</sup>. 
 
-For the supercomplex, as this structure is so large each subunit was converted to CG representation and then combined afterwards, with a script to generate an elastic network fot his. Each complex (e.g. Complex I, Complex III) of the supercomplex was treated seperately. First, needed an AT representation of each subunit in the complex and then can run `Scripts/Supercomplex_elastic_network/martinize_subunits.sh`. The `Scripts/Supercomplex_elastic_network/Combine_itps.ipynb` and `Scripts/Supercomplex_elastic_network/combine_cg_structures.sh` can then be run to get the CG structure file and `.itp` without the intersubunit elastic network. The `Scripts/Supercomplex_elastic_network/Create_elastic_network.ipynb` can then be used to generate this elastic network, and added into the overall `.itp` file.
+For the supercomplex, as this structure is so large each subunit was converted to CG representation and then combined afterwards, with a script to generate an elastic network for this. Each complex (e.g. Complex I, Complex III) of the supercomplex was treated separately. First, needed an AT representation of each subunit in the complex and then can run `Scripts/Supercomplex_elastic_network/martinize_subunits.sh`. The `Scripts/Supercomplex_elastic_network/Combine_itps.ipynb` and `Scripts/Supercomplex_elastic_network/combine_cg_structures.sh` can then be run to get the CG structure file and `.itp` without the inter-subunit elastic network. The `Scripts/Supercomplex_elastic_network/Create_elastic_network.ipynb` can then be used to generate this elastic network, and added into the overall `.itp` file.
 
 When the protein is in a CG representation, this can then be embedded in a membrane.
 For inner membrane proteins:
@@ -44,13 +44,13 @@ For inner membrane proteins:
 And for outer membrane proteins
 > `insane -u POPC:42.5 -u SAPE:32 -u PAPI:5 -u CHOL:15.5 -u PCER:5 -l POPC:52 -l SAPE:14 -l PAPI:19 -l CHOL:15 -d 10 -o system.gro -f ${cg_pdb} -pbc hexagonal -pr 0.01 -sol W -center -excl -1 2>&1 | tee -a topol.top`
 
-After generating the mebrane, the system is solvated and neutralised with NaCl ions, as well as adding 0.15 M NaCl. The system is then energy minimised and prepared for production runs. 
+After generating the membrane, the system is solvated and neutralised with NaCl ions, as well as adding 0.15 M NaCl. The system is then energy minimised and prepared for production runs. 
 
-The simulations were then visually inspected to see if there was any membrane purtubation, and `Lipid_binding_sites.ipynb` used to look at lipid density surrounding the proteins. 
+The simulations were then visually inspected to see if there was any membrane perturbation, and `Lipid_binding_sites.ipynb` used to look at lipid density surrounding the proteins. 
 
-![Workflow for highthroughput simulations](Images/High_throughput_figure.png)
+![Workflow for high throughput simulations](Images/High_throughput_figure.png)
 
-A final frame for each of the proteins were taken to provide the CG structure for the next steps, with an annualar lipid shell of ~1 nm. The resulting structures can be found in `Structures/Coarse_grain_structures`.
+A final frame for each of the proteins were taken to provide the CG structure for the next steps, with an annular lipid shell of ~1 nm. The resulting structures can be found in `Structures/Coarse_grain_structures`.
 
 ### Building the outer membrane
 The outer membrane was constructed using bentopy, providing the CG structures with the lipid shells. The exact file provided can be found `Scripts/Bentopy/Outer_membrane.json`. The commands used were then
@@ -67,12 +67,12 @@ As this inserts lipids into the $\beta$-barrels present, lipids were manually de
 
 
 ### Building the inner membrane
-In order to create an artifical surface to place the lipids and proteins, the 3D-modelling software [blender](https://www.blender.org/) was used, the files can be found `Structures/Blender`. The measurements and distances were based on experimental values as closely as possible. The shape was then save this as a `.obj` file. This can then be converted to a `.tsi` file to supply to TS2CG
+In order to create an artificial surface to place the lipids and proteins, the 3D-modelling software [blender](https://www.blender.org/) was used, the files can be found `Structures/Blender`. The measurements and distances were based on experimental values as closely as possible. The shape was then save this as a `.obj` file. This can then be converted to a `.tsi` file to supply to TS2CG
 > `python obj_to_tsi.py -i Cristae_extend.obj -o Cristae_extend.tsi -box 20 20 20`
 
 The protein placement at the cristae sides were generated with bentopy (with the file `Scripts/Bentopy/Inner_membrane.json`) and the same commands as for the outer membrane. The structures were used in the next steps as `Cristae_side_1.gro` and `Cristae_side_2.gro`.
 
-The following command can be used with `-Mashno 0` to see which vertices to add the proteins to by chaning the inclusion section of the `.tsi` files (see TS2CG documentation and tutorials for more information).
+The following command can be used with `-Mashno 0` to see which vertices to add the proteins to by changing the inclusion section of the `.tsi` files (see TS2CG documentation and tutorials for more information).
 > `PLM -TSfile Cristae_extend.tsi -bilayerThickness 3 -rescalefactor 5 5 5 -Mashno 3`
 
 This method generates a few `NaN` values which can be removed from the `point/innerBM.dat` and `point/OuterBM.dat` files using the `Scripts/Inner_membrane_building/remove_nan_gro.sh` file. 
@@ -82,7 +82,7 @@ The CG-representation can then be generated using the TS2CG command
 
 The `topol.top` file needs to be edited to account for the proteins included in the cristae sides, the ATPase row and lipids surrounding the proteins. 
 
-This method with the inputs provided often included lipids that are overlapping, which can be detected usig a bentopy command and then removed
+This method with the inputs provided often included lipids that are overlapping, which can be detected using a bentopy command and then removed
 > `python check_overlap_remove_residue.py system.gro`
 
 The system can then be solvated, ions added and energy minimised. This was then simulated for 1 &mu;s.
@@ -96,11 +96,12 @@ In order to combine the membranes, the two systems need to have similar xy dimen
 Both membranes had the solvent and ions removed from their system before performing the following steps. To combine the membranes into one coordinate file, the outer membrane was shifted to the correct distance using
 > `gmx editconf -f Outer.gro -o Outer.gro -translate 0 0 50`
 
-and saved with the inner membrane in pymol. The topol.top file needs to be changed to add the outer membrane consituents. Then change the box size to add enough room in the z-dimension
+and saved with the inner membrane in pymol. The topol.top file needs to be changed to add the outer membrane constituents. Then change the box size to add enough room in the z-dimension
 > `gmx editconf -f membranes_combined.pdb -c -box 64 64 115 -o membranes_combined_box.pdb`
 
-The system is then ready to add solvent, ions and perform an energy minimizaiton step. This was then simulated for 4 &mu;s.
+The system is then ready to add solvent, ions and perform an energy minimization step. This was then simulated for 4 &mu;s.
 
 ![Building complete crista system](Images/Building_complete_membrane.png)
 
-Analysis scripts can be found in `Scripts/Analysis`, including the inputs for `MDVoxelSegmentation` which produces the `clusters.npy` file that other analysis scripts rely upon. 
+Analysis scripts can be found in `Scripts/Analysis`, including the inputs for `MDVoxelSegmentation` which produces the `clusters.npy` file that other analysis scripts rely upon.
+![image](https://github.com/user-attachments/assets/1f087fc7-a71f-47e6-aac9-0e0024b9246a)
