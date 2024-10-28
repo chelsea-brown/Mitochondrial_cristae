@@ -1,0 +1,25 @@
+include Structures/ATPase_row.gro
+include Structures/Cristae_side_1.gro
+include Structures/Cristae_side_2.gro
+include Structures/TIM22_lipidshell.gro
+include Structures/TIM23_lipidshell.gro
+include Structures/MIC60_lipidshell.gro
+
+; lipidnname ratio_up ratio_down  APL
+[Lipids List]
+Domain 0
+POPC 0.29 0.51  0.68
+SAPE 0.36 0.32  0.67
+PAPI 0.06 0.04  0.52
+POPS 0.03 0.03  0.61
+CDL2 0.26 0.10  1.30
+End
+
+[Protein List]
+ATPase_row     1     0.01     0     0     -8.5
+Cristae_side_1 2     0.01     0     0     -3
+Cristae_side_2 3     0.01     0     0     -3
+MIC60_complex  4     0.01     0     0      6.5
+TIM23_complex  5     0.01     0     0      -2.5
+TIM22_complex  6     0.01     0     0      0.5
+End Protein
