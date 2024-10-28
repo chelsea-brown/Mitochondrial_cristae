@@ -104,4 +104,3 @@ The system is then ready to add solvent, ions and perform an energy minimization
 ![Building complete crista system](Images/Building_complete_membrane.png)
 
 Analysis scripts can be found in `Scripts/Analysis`, including the inputs for `MDVoxelSegmentation` which produces the `clusters.npy` file that other analysis scripts rely upon.
-![image](https://github.com/user-attachments/assets/1f087fc7-a71f-47e6-aac9-0e0024b9246a)
