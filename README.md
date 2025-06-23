@@ -20,7 +20,7 @@ The repository here should contain the information to set up the same systems, w
 
 ## Required programs
 - [vermouth-martinize](https://github.com/marrink-lab/vermouth-martinize)
-- [bentopy](https://github.com/marrink-lab/bentopy)
+- [bentopy](https://github.com/marrink-lab/bentopy) - the version used can be found [here](https://zenodo.org/records/13818758)
 - [TS2CG](https://github.com/marrink-lab/TS2CG)
 - [insane](https://github.com/Tsjerk/Insane)
 
