@@ -1,8 +1,8 @@
 # An integrative modelling approach to the mitochondrial cristae
 
-The link to the pre-print can be found [here](https://www.biorxiv.org/content/10.1101/2024.09.23.613389v1).
+The link to the publication can be found [here](https://www.nature.com/articles/s42003-025-08381-5).
 Please cite the below if you use anything from this repository:
-> Brown, C. M., Westendorp, M. S., Zarmiento-Garcia, R., Stevens, J. A., Rouse, S. L., Marrink, S. J., & Wassenaar, T. A. (2024). An integrative modelling approach to the mitochondrial cristae. bioRxiv, 2024-09.
+> Brown, C. M., Westendorp, M. S., Zarmiento-Garcia, R., Stevens, J. A., Bruininks, B. M., Rouse, S. L., Marrink S. J. & Wassenaar, T. A. (2025). An integrative modelling approach to the mitochondrial cristae. Communications Biology, 8(1), 972.
 
 ![A model of a mitochondrial cristae](Images/Starting_frame.png "Mitochondrial cristae model")
 
